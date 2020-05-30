@@ -2,7 +2,6 @@ package com.org.infy.proxy.model;
 
 import java.util.List;
 
-import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -33,9 +32,7 @@ public class Appreciation {
 	@Field(value = "appreciationDate")
 	private long appreciationDate;
 	
-	@Field(value = "fileName")
-    private List<String> fileName;
+	@Field(value = "fileInfo")
+    private List<FileInfo> fileInfo;
 	
-	@Field
-    private List<Binary> file;
 }
