@@ -35,7 +35,6 @@ public class ProxyController {
 
 	@Autowired
 	private ProxyService proxyService;
-	int index = 0;
 	@Autowired
 	private FileStorageService fileStorageService;
 
@@ -48,8 +47,8 @@ public class ProxyController {
 
 		long endTime = System.currentTimeMillis();
 
-		logger.info("Total processing time for step " + index + " : " + (endTime - startTime));
-		index++;
+		logger.info("Total processing time for step " + (endTime - startTime));
+
 
 		return new ResponseEntity<>(icountStore, HttpStatus.OK);
 
