@@ -24,7 +24,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Adapter Service").description("API for Adapter Service").version("1.0.0")
+		return new ApiInfoBuilder().title("Proxy Service").description("API for Proxy Service").version("1.0.0")
 				.termsOfServiceUrl("http://terms-of-services.url").license("LICENSE")
 				.licenseUrl("http://url-to-license.com").build();
 	}
