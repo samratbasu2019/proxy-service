@@ -21,6 +21,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.org.infy.proxy.model.Coins;
 import com.org.infy.proxy.model.FileInfo;
 import com.org.infy.proxy.model.ICountStore;
 import com.org.infy.proxy.service.FileStorageService;
@@ -37,6 +40,29 @@ public class ProxyController {
 	private ProxyService proxyService;
 	@Autowired
 	private FileStorageService fileStorageService;
+	
+	@GetMapping("/proxy/get/user/coins")
+	public ResponseEntity<?> getUserCoins(@RequestParam String emailId) throws JsonProcessingException {
+		//ObjectMapper objectMapper = new ObjectMapper();
+		long startTime = System.currentTimeMillis();
+
+		Map<String, Integer> userCoins = proxyService.getUserCoins(emailId);
+
+		long endTime = System.currentTimeMillis();
+
+		logger.info("Total processing time for step " + (endTime - startTime));
+
+
+		return new ResponseEntity<>(userCoins, HttpStatus.OK);
+
+	}
+	
+	@PostMapping("/proxy/user/coins/redeem")
+	public ResponseEntity<?> getUserCoinsRedeem(@RequestParam String emailId) {
+
+		return new ResponseEntity<>(null, HttpStatus.OK);
+
+	}
 
 	@GetMapping("/proxy/get/user/details")
 	public ResponseEntity<?> getUserDetails(@RequestParam String emailId) {
