@@ -46,7 +46,7 @@ public class ProxyController {
 		//ObjectMapper objectMapper = new ObjectMapper();
 		long startTime = System.currentTimeMillis();
 
-		Map<String, Integer> userCoins = proxyService.getUserCoins(emailId);
+		Map<List<String>, Integer> userCoins = proxyService.getUserCoins(emailId);
 
 		long endTime = System.currentTimeMillis();
 

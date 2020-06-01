@@ -27,6 +27,8 @@ public class ProxyService {
 	@Autowired
 	private UserCoinRepository userCoinsRepo;
 	int sumCoins = 0;
+	String email=null;
+	String name = null;
 
 	public ICountStore downloadAppreciation(String emailId, String fileName) {
 		return icountRepo.findByEmailAndAppreciationFileInfoFileName(emailId, fileName);
@@ -48,18 +50,23 @@ public class ProxyService {
 		return icountRepo.findByEmail(emailId);
 	}
 
-	public Map<String, Integer> getUserCoins(String emailId) throws JsonProcessingException {
+	public Map<List<String>, Integer> getUserCoins(String emailId) throws JsonProcessingException {
 		List<Coins> coins = userCoinsRepo.findByEmail(emailId);
-		Map<String, Integer> coinsMap = new HashedMap<>();
-		ObjectMapper objectMapper = new ObjectMapper();
+		Map<List<String>, Integer> coinsMap = new HashedMap<>();
+		List<String> nameMap = new ArrayList<String>();
+	//	ObjectMapper objectMapper = new ObjectMapper();
 		sumCoins = 0;
 		coins.stream().forEach(action->{		
 			sumCoins=sumCoins+action.getCoins();
 			logger.info("Total Sum :"+sumCoins);
+			email = action.getEmail();
+			name = action.getName();
 			
 		});
 		
-		coinsMap.put(objectMapper.writeValueAsString(coins), sumCoins);
+		nameMap.add(email);
+		nameMap.add(name);
+		coinsMap.put(nameMap, sumCoins);
 		return coinsMap;
 	}
 }
