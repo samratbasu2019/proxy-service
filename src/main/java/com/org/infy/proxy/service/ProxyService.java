@@ -1,5 +1,7 @@
 package com.org.infy.proxy.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.org.infy.proxy.model.Coins;
 import com.org.infy.proxy.model.FileInfo;
 import com.org.infy.proxy.model.ICountStore;
@@ -25,7 +27,6 @@ public class ProxyService {
 	@Autowired
 	private UserCoinRepository userCoinsRepo;
 	int sumCoins = 0;
-	String email=null;
 
 	public ICountStore downloadAppreciation(String emailId, String fileName) {
 		return icountRepo.findByEmailAndAppreciationFileInfoFileName(emailId, fileName);
@@ -47,19 +48,18 @@ public class ProxyService {
 		return icountRepo.findByEmail(emailId);
 	}
 
-	public Map<String, Integer> getUserCoins(String emailId) {
+	public Map<String, Integer> getUserCoins(String emailId) throws JsonProcessingException {
 		List<Coins> coins = userCoinsRepo.findByEmail(emailId);
 		Map<String, Integer> coinsMap = new HashedMap<>();
-		
+		ObjectMapper objectMapper = new ObjectMapper();
 		sumCoins = 0;
-		coins.parallelStream().forEach(action->{
-			email=action.getEmail();			
+		coins.stream().forEach(action->{		
 			sumCoins=sumCoins+action.getCoins();
 			logger.info("Total Sum :"+sumCoins);
 			
 		});
 		
-		coinsMap.put(email, sumCoins);
+		coinsMap.put(objectMapper.writeValueAsString(coins), sumCoins);
 		return coinsMap;
 	}
 }
