@@ -32,6 +32,7 @@ import com.org.infy.proxy.util.ResponseHelper;
 import com.org.infy.proxy.util.Utility;
 import org.springframework.core.io.Resource;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ProxyController {
 	protected final Log logger = LogFactory.getLog(this.getClass());
