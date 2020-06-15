@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.org.infy.proxy.dto.EmployeeAquiredCoins;
 import com.org.infy.proxy.model.Coins;
 import com.org.infy.proxy.model.FileInfo;
 import com.org.infy.proxy.model.ICountStore;
@@ -43,11 +44,11 @@ public class ProxyController {
 	private FileStorageService fileStorageService;
 	
 	@GetMapping("/proxy/get/user/coins")
-	public ResponseEntity<?> getUserCoins(@RequestParam String emailId) throws JsonProcessingException {
+	public ResponseEntity<EmployeeAquiredCoins> getUserCoins(@RequestParam String emailId) throws JsonProcessingException {
 		//ObjectMapper objectMapper = new ObjectMapper();
 		long startTime = System.currentTimeMillis();
 
-		Map<List<String>, Integer> userCoins = proxyService.getUserCoins(emailId);
+		EmployeeAquiredCoins userCoins = proxyService.getUserCoins(emailId);
 
 		long endTime = System.currentTimeMillis();
 
@@ -178,7 +179,7 @@ public class ProxyController {
 	public ResponseEntity<?> taskDownload(@RequestParam String emailId, @RequestParam String fileName, HttpServletRequest request) {
 		Resource resource = null;
 		String contentType = null;
-		ICountStore objStore = proxyService.downloadTask(emailId.trim(),fileName.trim());
+		ICountStore objStore = proxyService.downloadTask(emailId.trim(),fileName.trim(),"yes");
 		if (null!=objStore) {
 			 for (FileInfo fileInfo : objStore.getTask().get(0).getFileInfo()) 
 			 { 

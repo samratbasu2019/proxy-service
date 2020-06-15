@@ -15,16 +15,16 @@ public interface ICountRepository extends MongoRepository<ICountStore, String> {
 	public List<ICountStore> findByEmail(String email);
 	
 	@Cacheable("downloadAppreiation")
-	public ICountStore findByEmailAndAppreciationFileInfoFileName(String email,String fileName);
+	public ICountStore findFirstByEmailAndAppreciationFileInfoFileName(String email,String fileName);
 	
 	@Cacheable("downloadCourse")
-	public ICountStore findByEmailAndCourseFileInfoFileName(String email,String fileName);
+	public ICountStore findFirstByEmailAndCourseFileInfoFileName(String email,String fileName);
 	
 	@Cacheable("downloadFeedback")
-	public ICountStore findByEmailAndFeedbackFileInfoFileName(String email,String fileName);
+	public ICountStore findFirstByEmailAndFeedbackFileInfoFileName(String email,String fileName);
 	
 	@Cacheable("downloadTask")
-	public ICountStore findByEmailAndTaskFileInfoFileName(String email,String fileName);
+	public ICountStore findFirstByEmailAndTaskFileInfoFileNameAndIstask(String email,String fileName, String istask);
 
 
 }
