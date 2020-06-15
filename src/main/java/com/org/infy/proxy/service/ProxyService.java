@@ -23,7 +23,6 @@ import java.util.Map;
 @Service
 public class ProxyService {
 	protected final Log logger = LogFactory.getLog(this.getClass());
-
 	@Autowired
 	private ICountRepository icountRepo;
 	@Autowired

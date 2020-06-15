@@ -95,7 +95,6 @@ public class ProxyController {
 
 
 		return new ResponseEntity<>(icountStore, HttpStatus.OK);
-
 	}
 	
 	@PostMapping("/proxy/download/appreciation")

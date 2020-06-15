@@ -29,5 +29,4 @@ public interface ICountRepository extends MongoRepository<ICountStore, String> {
 	@Cacheable("downloadTask")
 	public ICountStore findFirstByEmailAndTaskFileInfoFileNameAndIstask(String email,String fileName, String istask);
 
-
 }
