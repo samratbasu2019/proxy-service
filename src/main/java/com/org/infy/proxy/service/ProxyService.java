@@ -52,6 +52,9 @@ public class ProxyService {
 		return icountRepo.findByEmail(emailId);
 	}
 
+	public List<ICountStore> getUserCategoryDetails(String emailId, String category) {
+		return icountRepo.findByEmailAndCategory(emailId, category);
+	}
 	public EmployeeAquiredCoins getUserCoins(String emailId) throws JsonProcessingException {
 		List<Coins> coins = userCoinsRepo.findByEmail(emailId);
 		Map<List<String>, Integer> coinsMap = new HashedMap<>();

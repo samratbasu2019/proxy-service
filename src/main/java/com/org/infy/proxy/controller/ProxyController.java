@@ -82,6 +82,22 @@ public class ProxyController {
 
 	}	
 	
+	@GetMapping("/proxy/get/user/category/details")
+	public ResponseEntity<?> getUserCategoryDetails(@RequestParam String emailId, @RequestParam String category) {
+
+		long startTime = System.currentTimeMillis();
+
+		List<ICountStore> icountStore = proxyService.getUserCategoryDetails(emailId, category);
+
+		long endTime = System.currentTimeMillis();
+
+		logger.info("Total processing time for step " + (endTime - startTime));
+
+
+		return new ResponseEntity<>(icountStore, HttpStatus.OK);
+
+	}
+	
 	@PostMapping("/proxy/download/appreciation")
 	public ResponseEntity<?> appreciationDownload(@RequestParam String emailId, @RequestParam String fileName, HttpServletRequest request) {
 		Resource resource = null;
