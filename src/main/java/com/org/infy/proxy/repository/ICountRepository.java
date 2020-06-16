@@ -17,6 +17,9 @@ public interface ICountRepository extends MongoRepository<ICountStore, String> {
 	@Cacheable("userCategoryDetails")
 	public List<ICountStore> findByEmailAndCategory(String email,String category);
 	
+	@Cacheable("userApprovedTaskDetails")
+	public List<ICountStore> findByEmailAndCategoryAndTaskTaskStatus(String email,String category, String taskStatus);
+	
 	@Cacheable("downloadAppreiation")
 	public ICountStore findFirstByEmailAndAppreciationFileInfoFileName(String email,String fileName);
 	

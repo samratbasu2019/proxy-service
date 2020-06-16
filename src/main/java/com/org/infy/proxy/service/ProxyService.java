@@ -52,7 +52,10 @@ public class ProxyService {
 	}
 
 	public List<ICountStore> getUserCategoryDetails(String emailId, String category) {
-		return icountRepo.findByEmailAndCategory(emailId, category);
+		if (!category.equalsIgnoreCase("task"))
+			return icountRepo.findByEmailAndCategory(emailId, category);
+		else
+			return icountRepo.findByEmailAndCategoryAndTaskTaskStatus(emailId, category,"approved");
 	}
 	public EmployeeAquiredCoins getUserCoins(String emailId) throws JsonProcessingException {
 		List<Coins> coins = userCoinsRepo.findByEmail(emailId);
