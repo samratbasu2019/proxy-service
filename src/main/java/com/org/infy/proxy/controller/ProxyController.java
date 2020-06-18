@@ -46,7 +46,7 @@ public class ProxyController {
 	
 	@GetMapping("/proxy/get/jira/tasks")
 	public ResponseEntity<?> getJiraTasks(@RequestParam String emailId) throws JsonProcessingException {
-		//ObjectMapper objectMapper = new ObjectMapper();
+	
 		long startTime = System.currentTimeMillis();
 
 		List<JiraTaskStore> jiraTasks = proxyService.getJiraTasks(emailId);
