@@ -27,6 +27,7 @@ import com.org.infy.proxy.dto.EmployeeAquiredCoins;
 import com.org.infy.proxy.model.Coins;
 import com.org.infy.proxy.model.FileInfo;
 import com.org.infy.proxy.model.ICountStore;
+import com.org.infy.proxy.model.JiraTaskStore;
 import com.org.infy.proxy.service.FileStorageService;
 import com.org.infy.proxy.service.ProxyService;
 import com.org.infy.proxy.util.ResponseHelper;
@@ -42,6 +43,22 @@ public class ProxyController {
 	private ProxyService proxyService;
 	@Autowired
 	private FileStorageService fileStorageService;
+	
+	@GetMapping("/proxy/get/jira/tasks")
+	public ResponseEntity<?> getJiraTasks(@RequestParam String emailId) throws JsonProcessingException {
+		//ObjectMapper objectMapper = new ObjectMapper();
+		long startTime = System.currentTimeMillis();
+
+		List<JiraTaskStore> jiraTasks = proxyService.getJiraTasks(emailId);
+
+		long endTime = System.currentTimeMillis();
+
+		logger.info("Total processing time for step " + (endTime - startTime));
+
+
+		return new ResponseEntity<>(jiraTasks, HttpStatus.OK);
+
+	}
 	
 	@GetMapping("/proxy/get/user/coins")
 	public ResponseEntity<EmployeeAquiredCoins> getUserCoins(@RequestParam String emailId) throws JsonProcessingException {

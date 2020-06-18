@@ -7,7 +7,9 @@ import com.org.infy.proxy.dto.EmployeeAquiredCoins;
 import com.org.infy.proxy.model.Coins;
 import com.org.infy.proxy.model.FileInfo;
 import com.org.infy.proxy.model.ICountStore;
+import com.org.infy.proxy.model.JiraTaskStore;
 import com.org.infy.proxy.repository.ICountRepository;
+import com.org.infy.proxy.repository.JiraRepository;
 import com.org.infy.proxy.repository.UserCoinRepository;
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -27,6 +29,8 @@ public class ProxyService {
 	private ICountRepository icountRepo;
 	@Autowired
 	private UserCoinRepository userCoinsRepo;
+	@Autowired
+	private JiraRepository jiraRepo;
 	int sumCoins = 0;
 
 	String email = null, name = null, employeeId = null;
@@ -49,6 +53,10 @@ public class ProxyService {
 
 	public List<ICountStore> getUserDetails(String emailId) {
 		return icountRepo.findByEmail(emailId);
+	}
+	
+	public List<JiraTaskStore> getJiraTasks(String emailId) {
+		return jiraRepo.findAll();
 	}
 
 	public List<ICountStore> getUserCategoryDetails(String emailId, String category) {
