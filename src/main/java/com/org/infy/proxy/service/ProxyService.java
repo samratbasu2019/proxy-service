@@ -11,6 +11,7 @@ import com.org.infy.proxy.model.JiraTaskStore;
 import com.org.infy.proxy.repository.ICountRepository;
 import com.org.infy.proxy.repository.JiraRepository;
 import com.org.infy.proxy.repository.UserCoinRepository;
+import com.org.infy.proxy.util.Constants;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.logging.Log;
@@ -77,12 +78,15 @@ public class ProxyService {
 		employeeId = null;
 		sumCoins = 0;
 		coins.stream().forEach(action -> {
-
+			logger.info("inside Coin calculatiom");
 			CoinDetails cd = new CoinDetails();
 			cd.setCoins(action.getCoins());
-			cd.setLastupdated(action.getLastupdated());
+			cd.setLastupdated(Constants.epochToDate(action.getLastupdated()));
 			cd.setRedeemed(action.getRedeemed());
-			cd.setRedeemdate(action.getRedeemdate());
+			if (action.getRedeemdate()!=0)
+				cd.setRedeemdate(Constants.epochToDate(action.getRedeemdate()));
+			else
+				cd.setRedeemdate("");
 			coinDetails.add(cd);
 			sumCoins = sumCoins + action.getCoins();
 			logger.info("Total Sum :" + sumCoins);
