@@ -11,25 +11,25 @@ import com.org.infy.proxy.model.ICountStore;
 @Repository
 public interface ICountRepository extends MongoRepository<ICountStore, String> {
 	
-	@Cacheable("iCountStore")
+	//@Cacheable("iCountStore")
 	public List<ICountStore> findByEmail(String email);
 	
-	@Cacheable("userCategoryDetails")
+	//@Cacheable("userCategoryDetails")
 	public List<ICountStore> findByEmailAndCategory(String email,String category);
 	
-	@Cacheable("userApprovedTaskDetails")
+	//@Cacheable("userApprovedTaskDetails")
 	public List<ICountStore> findByEmailAndCategoryAndTaskTaskStatus(String email,String category, String taskStatus);
 	
-	@Cacheable("downloadAppreiation")
+	//@Cacheable("downloadAppreiation")
 	public ICountStore findFirstByEmailAndAppreciationFileInfoFileName(String email,String fileName);
 	
-	@Cacheable("downloadCourse")
+	//@Cacheable("downloadCourse")
 	public ICountStore findFirstByEmailAndCourseFileInfoFileName(String email,String fileName);
 	
-	@Cacheable("downloadFeedback")
+	//@Cacheable("downloadFeedback")
 	public ICountStore findFirstByEmailAndFeedbackFileInfoFileName(String email,String fileName);
 	
-	@Cacheable("downloadTask")
+	//@Cacheable("downloadTask")
 	public ICountStore findFirstByEmailAndTaskFileInfoFileNameAndIstask(String email,String fileName, String istask);
 
 }

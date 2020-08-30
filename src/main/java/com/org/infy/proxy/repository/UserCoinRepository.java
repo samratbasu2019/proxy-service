@@ -10,6 +10,6 @@ import com.org.infy.proxy.model.Coins;
 
 @Repository
 public interface UserCoinRepository extends MongoRepository<Coins, String>{
-	@Cacheable("coins")
+	//@Cacheable("coins")
 	public List<Coins> findByEmail(String email);
 }

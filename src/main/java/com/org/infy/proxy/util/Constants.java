@@ -11,7 +11,7 @@ public class Constants {
 	}
 	
 	public static String epochToDate(long epochDate) {
-		Date date = new Date(epochDate*100);
+		Date date = new Date(epochDate);
 		DateFormat df = new SimpleDateFormat("dd MMM yyyy hh:mm:ss");	
 		df.setTimeZone(TimeZone.getTimeZone("IST"));
 		return df.format(date);
